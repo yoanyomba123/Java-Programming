@@ -1,0 +1,5 @@
+package Utilities;
+
+public class Constants {
+	public final String APIKEY = "YssXi8vj6oj3dhefmv1J";
+}

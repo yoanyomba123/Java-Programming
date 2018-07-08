@@ -1,0 +1,45 @@
+package com.example.demo;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Properties;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.QuandlData.QuandlDataApi;
+import com.jimmoores.quandl.TabularResult;
+
+@SpringBootApplication
+@RestController
+@EnableAutoConfiguration
+public class AnalyticsApplication {
+	
+	InputStream input = null;
+	// define global variables as well as initiate a quandl connection
+	Properties prop = new Properties();
+	InputStream input = new FileInputStream("config.properties");
+
+
+	// get properties from project root folder
+	QuandlDataApi apisession = new QuandlDataApi();
+	/*
+	 * Any requests made to "/" should map to the getHome() method
+	 */
+	@RequestMapping("/")
+	public String getHome() {
+		// perform an api call to quandl for the major indices
+		TabularResult table = apisession.getStockDailyData(stockticker);
+		return "Home";
+	}
+	
+	
+	public static void main(String[] args) {
+		SpringApplication.run(AnalyticsApplication.class, args);
+	}
+}

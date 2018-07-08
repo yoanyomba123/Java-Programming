@@ -1,0 +1,61 @@
+package com.example.demo.QuandlData;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
+import java.util.List;
+
+import com.jimmoores.quandl.TabularResult;
+
+import tech.tablesaw.columns.Column;
+
+/*
+ * 
+ * QuandDataApi - Class provides functions and methods to process financial data sets
+ * 
+ * Developer - D Yoan L Mekontchou Yomba
+ * Date - June 23, 2018
+ * 
+ */
+public class ProcessData {
+
+	/*
+	 * computeDailyVariance - This method computes the daily, weekly, monthly, and quarterly volatility present within some financial data set
+	 */
+	public tech.tablesaw.api.Table computeVolatility(TabularResult dailytable){
+		final String OPEN = "OPEN";
+		final String CLOSE = "CLOSE";
+		final String VOLATILITY = "VOLATILITY";
+		List<String> columnnames = dailytable.columnNames();
+		
+		// check if the open price is present in the data set
+		if(columnnames.contains("Open")) {
+			List<Column> columns = dailytable.columns(CLOSE, OPEN);
+			double[] open_col = columns.get(1).toDoubleArray();
+			double[] close_col = columns.get(0).toDoubleArray();
+			
+			Column daily_volatility = null;
+			//daily_volatility.appendCell(VOLATILITY);
+			for(int i = 0; i < close_col.length-1; i++) {
+				String variance = String.valueOf(100*(Math.abs(close_col[i] - open_col[i])/close_col[i]));
+				System.out.println(variance);
+				daily_volatility.appendCell(variance);
+			}
+			dailytable.addColumn(daily_volatility);
+		}
+		else{
+			Column daily_volatility = null;
+			//daily_volatility.appendCell(VOLATILITY);
+			List<Column> columns = dailytable.columns(CLOSE);
+			double[] close_col = columns.get(0).toDoubleArray();
+			for(int i = 0; i < close_col.length-2; i++) {
+				double value = (Math.abs(close_col[i] - close_col[i+1])/close_col[i+1]) * 100;
+				String variance = String.valueOf(value);
+				System.out.println(variance);
+				daily_volatility.appendCell(variance);
+			}
+			dailytable.addColumn(daily_volatility);
+		}
+		return dailytable;
+	}
+	
+}

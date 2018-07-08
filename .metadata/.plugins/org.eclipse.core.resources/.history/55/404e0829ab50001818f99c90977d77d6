@@ -1,0 +1,105 @@
+/*
+ * Author: D Yoan L Mekontchou Yomba
+ * Date: 5/5/18
+ * 
+ * 
+ * Goal: To implement an algorithm able to detect the presence of palindromes 
+ * within strings
+ * 
+ * 
+ */
+
+/*
+ *  Specify import
+ */
+import java.util.*;
+import java.lang.*;
+import java.math.*;
+
+public class PalindromeTester {
+	
+	/*
+	 *  Tests if two strings are equal in length
+	 */
+	private boolean isEqualSize(char[] text1, char[] text2) {	
+		if(text1.length ==  text2.length) {
+			return true;
+		}
+		return false;	
+	}
+	
+	/*
+	 * Checks if all values present within two arrays are equal
+	 * 
+	 */
+	private boolean isSame(char[] arg1, char[] arg2){
+		for(int i = 0; i < arg1.length; i++) {
+			if(arg1[i] != arg2[i]) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	/*
+	 *  Returns a character array representation of the string
+	 */
+	private char[] toCharacterArray(String text) {
+		return text.toCharArray();
+	}
+	
+	/*
+	 * Test wether a string is a palindrome and returns a boolean
+	 * 
+	 */
+	public boolean isPalindrome(String arg1) {
+		char[] arg = toCharacterArray(arg1);
+		boolean isequalsize, issame;
+		// create an array placeholder
+		char[] temp_arr = new char[arg.length];
+
+		// iterate over all values in the array from the end
+		for(int i = 0; i < arg.length; i++ ) {
+			// order the values in the array
+			temp_arr[temp_arr.length-i-1] = arg[i];
+		}
+		
+		// check if array parameters are of the same size 
+		isequalsize = isEqualSize(arg, temp_arr);		
+		issame = isSame(arg, temp_arr);
+
+		// if character arrays are equals in size and all values are equals 
+		// at each point
+		if( issame && isequalsize) {
+			return true;
+		}
+		return false;
+	}
+	
+	public static void main(String[] args) {
+		String inputtext;
+		PalindromeTester stringtest;
+		// define a new scanner object 
+		Scanner input = new Scanner(System.in);
+		boolean tryAnother = true;
+		// print out a statement
+		System.out.println("Enter a potentiol palindrome\n");
+		inputtext = input.nextLine();
+		stringtest = new PalindromeTester();
+		if(stringtest.isPalindrome(inputtext)) {
+			System.out.println("That string Is a palindrome");
+		}else {
+			System.out.println("That string NOT a palindrome");
+		}
+		System.out.print("Test another Palindrome (y/n)?");
+		String choice = input.next();
+		if(choice.toLowerCase() == "n") {
+			tryAnother = false;
+		}
+		else if(choice.toLowerCase() != "n" && choice.toLowerCase() != "y" ) {
+			System.out.println("Invalid Answer. Assumption is made that you aim to continue");
+		}		
+	}
+
+	
+}

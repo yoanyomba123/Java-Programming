@@ -1,0 +1,47 @@
+package com.example.demo.QuandlData;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
+import java.util.List;
+
+import tech.tablesaw.columns.Column;
+
+/*
+ * 
+ * QuandDataApi - Class provides functions and methods to process financial data sets
+ * 
+ * Developer - D Yoan L Mekontchou Yomba
+ * Date - June 23, 2018
+ * 
+ */
+public class ProcessData {
+
+	/*
+	 * computeDailyVariance - This method computes the daily, weekly, monthly, and quarterly volatility present within some financial data set
+	 */
+	public tech.tablesaw.api.Table computeVolatility(tech.tablesaw.api.Table table){
+		final String OPEN = "OPEN";
+		final String CLOSE = "CLOSE";
+		List<String> columnnames = table.columnNames();
+		
+		// check if the open price is present in the data set
+		if(columnnames.contains("Open")) {
+			for(String name: columnnames) {
+				if(name.equals("Close")) {
+					List<Column> columns = table.columns(CLOSE, OPEN);
+					double[] open_col = columns.get(1).toDoubleArray();
+					double[] close_col = columns.get(0).toDoubleArray();
+					
+					Column daily_volatility = null;
+					for(int i = 0; i < close_col.length; i++) {
+						daily_volatility.append(Math.abs(close_col[i] - open_col[i])/100);
+					}
+				}
+			}
+		}
+		
+		return table;
+		
+	}
+	
+}

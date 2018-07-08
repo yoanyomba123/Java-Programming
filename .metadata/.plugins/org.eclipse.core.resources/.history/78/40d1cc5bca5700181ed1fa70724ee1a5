@@ -1,0 +1,12 @@
+package Processing;
+
+import ThreeDImplementations.*;
+import TwoDImplementations.*;
+import java.io.*;
+
+public class FileProcessing {
+	public static void main(String[] args) throws FileNotFoundException {
+		FileReader fr = new FileReader(Homework7/src/Processing/inputfile.txt");
+		System.out.println(fr);
+	}
+}

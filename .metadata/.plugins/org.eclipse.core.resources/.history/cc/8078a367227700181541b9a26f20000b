@@ -1,0 +1,26 @@
+package com.example.demo.QuandlData;
+
+
+
+/*
+ * QuandDataApi - Class provides functions and methods to access 
+ * Financial Time Series Data from quandl.com
+ * 
+ * Developer - D Yoan L Mekontchou Yomba
+ * Date - June 23, 2018
+ * 
+ */
+public class QuandlDataApi {
+
+	// define constructor
+	public QuandlDataApi() {
+		
+		ClassicQuandlSession session = ClassicQuandlSession.create();
+		TabularResult tabularResult = session.getDataSet(
+		  DataSetRequest.Builder.of("WIKI/AAPL").build());
+		System.out.println(tabularResult.toPrettyPrintedString());
+		
+	}
+	
+	
+}

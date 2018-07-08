@@ -1,0 +1,7 @@
+package Utilities;
+
+import com.jimmoores.quandl.SessionOptions;
+
+public class Constants {
+	public final SessionOptions APIKEY = "YssXi8vj6oj3dhefmv1J";
+}

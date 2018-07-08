@@ -1,0 +1,10 @@
+package Utilities;
+
+import com.jimmoores.quandl.SessionOptions;
+import com.jimmoores.quandl.SessionOptions.Builder;
+
+public class Constants {
+	public final SessionOptions APIKEY = SessionOptions.class.newInstance("ClassicQuandlSession");
+			
+			("YssXi8vj6oj3dhefmv1J");
+}

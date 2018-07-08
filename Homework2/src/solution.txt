@@ -1,0 +1,13 @@
+1. When javac helloworld.java is ran, helloworld.java is compiled into a byte code class file and a helloworld.class file is generated.
+2. When javac -verbose helloworld.java is ran, allows us to see what the compiler is doing during the compilation process
+3. When javac hello.world.java is ran, the following usage warning is generated
+    Usage: javac <options> <source files>
+    use -help for a list of possible options
+4. Assuming l am in the parent directory of my MyJavaPrograms, when l run javac helloworld.java,l get the following terminal statement
+   javac: file not found: helloworld.java as the file is not present in the current directory but is in a subdirectory
+5. To instruct the compiler to store a class file in the directory MyJavaPrograms, the option that should be used is -d
+6. While in the MyJavaProgram directory, when l run java helloworld, the helloworld.class file is executed and the string "hello World" is
+   printed to the terminal.
+7. When l try to run java heloworld, l get the following error,
+   Error: Could not find or load main class heloworld as there is a mistake in the file name
+8. When l run java -verbose helloworld, information about each  loaded class is displayed as well as the string "hello world"

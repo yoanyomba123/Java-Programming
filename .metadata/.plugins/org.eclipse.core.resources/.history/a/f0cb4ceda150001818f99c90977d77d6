@@ -1,0 +1,13 @@
+/*
+ * Author: D Yoan L Mekontchou Yomba
+ * Date: 5/5/18
+ * 
+ * 
+ * Goal: To implement an algorithm able to detect the presence of palindromes 
+ * within strings
+ * 
+ * 
+ */
+public class PalindromeTester {
+
+}

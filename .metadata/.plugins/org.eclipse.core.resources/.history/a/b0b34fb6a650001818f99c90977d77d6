@@ -1,0 +1,83 @@
+/*
+ * Author: D Yoan L Mekontchou Yomba
+ * Date: 5/5/18
+ * 
+ * 
+ * Goal: To implement an algorithm able to detect the presence of palindromes 
+ * within strings
+ * 
+ * 
+ */
+
+/*
+ *  Specify import
+ */
+import java.util.*;
+import java.lang.*;
+import java.math.*;
+
+public class PalindromeTester {
+	
+	/*
+	 *  Tests if two strings are equal in length
+	 */
+	private boolean isEqualSize(char[] text1, char[] text2) {	
+		if(text1.length ==  text2.length) {
+			return true;
+		}
+		return false;	
+	}
+	
+	/*
+	 *  Returns a character array representation of the string
+	 */
+	private char[] toCharacterArray(String text) {
+		return text.toCharArray();
+	}
+	
+	/*
+	 * Test wether a string is a palindrome and returns a boolean
+	 * 
+	 */
+	public boolean isPalindrome(String arg1) {
+		char[] arg = toCharacterArray(arg1);
+		System.out.println(arg);
+		boolean isequalsize;
+		// create an array placeholder
+		char[] temp_arr = new char[arg.length];
+
+		System.out.println(temp_arr.length);
+		// iterate over all values in the array from the end
+		for(int i = arg.length - 1; i >= 0; i++ ) {
+			// order the values in the array
+			System.out.println((temp_arr.length - 1 - i));
+			temp_arr[(temp_arr.length - 1) - i] = arg[i];
+		}
+		
+		// check if array parameters are of the same size 
+		isequalsize = isEqualSize(arg, temp_arr);		
+		
+		// if character arrays are equals in size and all values are equals 
+		// at each point
+		if( temp_arr.equals(arg) && isequalsize) {
+			return true;
+		}
+		return false;
+	}
+	
+	public static void main(String[] args) {
+		// define a new scanner object 
+		Scanner input = new Scanner(System.in);
+		System.out.println("Enter a potentiol palindrome");
+		String inputtext = input.nextLine();
+		
+		PalindromeTester stringtest = new PalindromeTester();
+		if(stringtest.isPalindrome(inputtext)) {
+			System.out.println("That string Is a palindrome");
+		}else {
+			System.out.println("That string NOT a palindrome");
+		}
+	}
+
+	
+}

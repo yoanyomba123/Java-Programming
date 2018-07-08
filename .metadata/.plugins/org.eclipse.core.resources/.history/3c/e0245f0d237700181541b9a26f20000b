@@ -1,0 +1,36 @@
+package com.example.demo.QuandlData;
+
+import com.jimmoores.quandl.DataSetRequest;
+import com.jimmoores.quandl.TabularResult;
+import com.jimmoores.quandl.classic.ClassicQuandlSession;
+
+/*
+ * QuandDataApi - Class provides functions and methods to access 
+ * Financial Time Series Data from quandl.com
+ * 
+ * Developer - D Yoan L Mekontchou Yomba
+ * Date - June 23, 2018
+ * 
+ */
+public class QuandlDataApi {
+	// define global Quandl Session
+	ClassicQuandlSession session = null;
+	TabularResult tabularResult = null;
+	
+	// define constructor
+	public QuandlDataApi() {
+		session = ClassicQuandlSession.create();
+
+	}
+	
+	// get Method to acquire data of a specific stock
+	public TabularResult getStockData(String stockticker) {
+		tabularResult = session.getDataSet(DataSetRequest.Builder.of(stockticker).build());
+		return tabularResult;
+	}
+	
+	
+	
+	
+	
+}

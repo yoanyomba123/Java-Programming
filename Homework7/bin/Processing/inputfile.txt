@@ -1,0 +1,12 @@
+circle 10 20 5
+circle 3 5 10
+square 4
+square 10
+triangle 10 10 10
+triangle 20 20 20
+sphere 30
+sphere 2
+cube 11
+cube 10
+tetrahedron 11
+tetrahedron 12

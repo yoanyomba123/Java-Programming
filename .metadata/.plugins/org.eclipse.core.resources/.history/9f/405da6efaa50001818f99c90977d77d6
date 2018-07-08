@@ -1,0 +1,15 @@
+import java.util.*;
+import java.lang.*;
+public class PalindromeRecursive {
+
+	public boolean isPalindrome(String arg) {
+		if(arg.length() == 0 || arg.length() == 1) {
+			return true;
+		}
+		else {
+			
+		}
+		return false;
+		
+	}
+}

@@ -1,0 +1,63 @@
+package com.example.demo;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Properties;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.QuandlData.ProcessData;
+import com.example.demo.QuandlData.QuandlDataApi;
+import com.jimmoores.quandl.TabularResult;
+
+@SpringBootApplication
+@RestController
+@EnableAutoConfiguration
+public class GsAnalyticsApplication {
+
+	// define global variables as well as initiate a quandl connection
+	Properties prop = new Properties();
+	InputStream input = null;
+
+	
+
+	// get properties from project root folder
+	QuandlDataApi apisession = new QuandlDataApi();
+	ProcessData dataengine = new ProcessData();
+	/*
+	 * Any requests made to "/" should map to the getHome() method
+	 */
+	@RequestMapping("/home")
+	public String getHome() throws IOException {
+		// access the config file for exhange name
+		input = new FileInputStream("config.properties");
+		prop.load(input);
+		String NikkeiIndex = prop.getProperty("NIKKEI_ALL_STOCK_INDEX");
+		
+		// perform an api call to quandl for the major indices
+		tech.tablesaw.api.Table dailytable = apisession.getStockDailyData(NikkeiIndex);
+		tech.tablesaw.api.Table monthlyData = apisession.getStockMonthlyData(NikkeiIndex);
+		tech.tablesaw.api.Table weeklyData = apisession.getStockWeeklyData(NikkeiIndex);
+		
+		dailytable = dataengine.computeVolatility(dailytable);
+		
+		System.out.println(dailytable);
+		System.out.println(monthlyData);
+		System.out.println(weeklyData);
+
+		return "Home";
+	}
+		
+	public static void main(String[] args) {
+		SpringApplication.run(GsAnalyticsApplication.class, args);
+	}
+}

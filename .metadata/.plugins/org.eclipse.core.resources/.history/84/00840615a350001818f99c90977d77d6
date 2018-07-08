@@ -1,0 +1,52 @@
+/*
+ * Author: D Yoan L Mekontchou Yomba
+ * Date: 5/5/18
+ * 
+ * 
+ * Goal: To implement an algorithm able to detect the presence of palindromes 
+ * within strings
+ * 
+ * 
+ */
+
+/*
+ *  Specify import
+ */
+import java.util.*;
+import java.lang.*;
+import java.math.*;
+
+public class PalindromeTester {
+	
+	/*
+	 *  Tests if two strings are equal in length
+	 */
+	private boolean isEqualSize(String text1, String text2) {	
+		if(text1.length() ==  text2.length()) {
+			return true;
+		}
+		return false;	
+	}
+	
+	/*
+	 *  Returns a character array representation of the string
+	 */
+	private char[] toCharacterArray(String text) {
+		return text.toCharArray();
+	}
+	
+	public boolean isPalindrome(char[] arg1) {
+		
+		char[] temp_arr = new char[arg1.length];
+		for(int i = arg1.length - 1; i >= 0; i++ ) {
+			temp_arr[arg1.length - i] = arg1[i];
+		}
+		if( temp_arr.equals(arg1)) {
+			return true;
+		}
+		return false;
+	}
+	
+	
+	
+}

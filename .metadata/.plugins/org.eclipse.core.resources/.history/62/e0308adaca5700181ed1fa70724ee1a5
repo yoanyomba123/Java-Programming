@@ -1,0 +1,16 @@
+package Processing;
+
+import ThreeDImplementations.*;
+import TwoDImplementations.*;
+import java.io.*;
+
+public class FileProcessing {
+	public static void main(String[] args) throws FileNotFoundException {
+		FileReader fr = new FileReader("inputfile.txt");
+		
+		path = Foo.class.getResource("inputfile.txt");
+		File f = new File(path.getFile());
+		reader = new BufferedReader(new FileReader(f));
+		System.out.println(fr);
+	}
+}

@@ -1,0 +1,73 @@
+package com.example.demo.QuandlData;
+
+import com.google.common.collect.Table;
+import com.jimmoores.quandl.DataSetRequest;
+import com.jimmoores.quandl.Frequency;
+import com.jimmoores.quandl.TabularResult;
+import com.jimmoores.quandl.classic.ClassicQuandlSession;
+import com.jimmoores.quandl.tablesaw.TableSawQuandlSession;
+
+/*
+ * QuandDataApi - Class provides functions and methods to access 
+ * Financial Time Series Data from quandl.com
+ * 
+ * Developer - D Yoan L Mekontchou Yomba
+ * Date - June 23, 2018
+ * 
+ */
+public class QuandlDataApi {
+	// define global Quandl Session
+	TableSawQuandlSession session = null;
+	TabularResult tabularResult = null;
+	
+	// define constructor
+	public QuandlDataApi() {
+		session = TableSawQuandlSession.create();
+
+	}
+	
+	
+	public void getData() {
+		TableSawQuandlSession tablesession = TableSawQuandlSession.create();
+		TabularResult table = session.getDataSet(
+		    DataSetRequest.Builder.of("NIKKEI/ALL_STOCK").withMaxRows(10).build());
+		System.out.println(table.toPrettyPrintedString());
+	}
+	
+	// get Method to acquire data of a specific stock
+	public TabularResult getStockData(String stockticker) {
+		tabularResult = session.getDataSet(DataSetRequest.Builder.of(stockticker).build());
+		return tabularResult;
+	}
+
+	// get Method to acquire data of a specific stock on a month to month basis
+	public TabularResult getStockMonthlyData(String stockticker) {
+		tabularResult = session.getDataSet(DataSetRequest.Builder.of(stockticker).withFrequency(Frequency.MONTHLY).build());
+		return tabularResult;
+	}
+	
+	// get Method to acquire data of a specific stock on a week to week basis
+	public TabularResult getStockWeeklyData(String stockticker) {
+		tabularResult = session.getDataSet(DataSetRequest.Builder.of(stockticker).withFrequency(Frequency.WEEKLY).build());
+		return tabularResult;
+	}
+	
+	// get Method to acquire data of a specific stock on a quarterly basis
+	public TabularResult getStockQuarterlyData(String stockticker) {
+		tabularResult = session.getDataSet(DataSetRequest.Builder.of(stockticker).withFrequency(Frequency.QUARTERLY).build());
+		return tabularResult;
+	}
+	
+	// get Method to acquire data of a specific stock on a day to day basis
+	public TabularResult getStockDailyData(String stockticker) {
+		tabularResult = session.getDataSet(DataSetRequest.Builder.of(stockticker).withFrequency(Frequency.DAILY).build());
+		return tabularResult;
+	}
+	
+	
+
+	
+	
+	
+	
+}
